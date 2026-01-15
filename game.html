@@ -14,7 +14,6 @@ body {
     overflow: hidden;
 }
 
-/* Title */
 h1 {
     position: absolute;
     top: 100px;
@@ -25,7 +24,7 @@ h1 {
     text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
 }
 
-/* Score */
+
 #scoreboard {
     position: absolute;
     top: 200px;
@@ -35,7 +34,7 @@ h1 {
     color: #333;
 }
 
-/* Balloon style */
+
 .balloon {
     position: absolute;
     bottom: -100px;
@@ -46,13 +45,13 @@ h1 {
     box-shadow: inset -5px -5px rgba(0,0,0,0.2);
 }
 
-/* Balloon float animation */
+
 @keyframes floatUp {
     0% { transform: translateY(0); }
     100% { transform: translateY(-900px); }
 }
 
-/* Pop effect */
+
 .pop {
     transform: scale(0);
     opacity: 0;
@@ -71,30 +70,27 @@ let gameInterval;
 let balloonColors = ['#FF4E50','#FFD93D','#4EC5F1','#AB47BC','#7ED957'];
 
 
-// Function to return random color
+
 function randomColor() {
     return balloonColors[Math.floor(Math.random() * balloonColors.length)];
 }
 
-// Function to create a balloon
 function createBalloon() {
     let balloon = $('<div class="balloon"></div>');
     let left = Math.random() * (window.innerWidth - 60);
     balloon.css({ left: left + 'px', background: randomColor() });
     $('body').append(balloon);
 
-    // Animate balloon float
+   
     let duration = 5000 + Math.random() * 5000; // 5-10 sec
     balloon.css({ animation: `floatUp ${duration}ms linear forwards` });
 
-    // Remove balloon when out of screen
     setTimeout(() => balloon.remove(), duration);
 
  balloon.click(function() {
     score++;
     $('#scoreboard').text('Score: ' + score);
 
-    // Immediately pop balloon
     $(this).css({
         transform: 'scale(0)',
         opacity: 0,
@@ -107,7 +103,7 @@ function createBalloon() {
 }
 
 
-// Function to animate the title pulse
+
 function pulseTitle() {
     $('#title')
         .animate({ transform: 'scale(1.2)' }, {
@@ -122,7 +118,6 @@ function pulseTitle() {
         });
 }
 
-// Function to start the game
 function startPopBalloonGame(durationSec = 30, spawnRate = 800) {
     score = 0;
     $('#scoreboard').text('Score: ' + score);
@@ -136,7 +131,7 @@ function startPopBalloonGame(durationSec = 30, spawnRate = 800) {
     }, durationSec * 1000);
 }
 
-// Start game and title pulse automatically on page load
+
 $(document).ready(function() {
     pulseTitle();
     startPopBalloonGame();
@@ -145,4 +140,5 @@ $(document).ready(function() {
 
 </body>
 </html>
+
 
